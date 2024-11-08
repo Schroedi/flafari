@@ -11,6 +11,7 @@ interface UseCameraReturn {
 	stopCamera: () => void;
 	takePicture: () => Promise<string>;
 	error: string | null;
+	capturedImage: string | null;
 }
 
 export const useCamera = (): UseCameraReturn => {
@@ -23,10 +24,13 @@ export const useCamera = (): UseCameraReturn => {
 	const [currentFacingMode, setCurrentFacingMode] = useState<
 		"user" | "environment"
 	>("environment");
+	const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
 	const stopCamera = useCallback(() => {
 		if (stream) {
-			stream.getTracks().forEach((track) => track.stop());
+			for (const track of stream.getTracks()) {
+				track.stop();
+			}
 			if (videoRef.current) {
 				videoRef.current.srcObject = null;
 			}
@@ -69,14 +73,15 @@ export const useCamera = (): UseCameraReturn => {
 	);
 
 	const takePicture = useCallback(async (): Promise<string> => {
-		if (!videoRef.current || !canvasRef.current) {
-			throw new Error("Video or canvas reference not available");
+		const canvas = canvasRef.current;
+		const video = videoRef.current;
+		if (!video || !canvas) {
+			throw new Error(`Video or canvas reference not available: ${video} ${canvas}`);
 		}
 
 		return new Promise((resolve, reject) => {
 			try {
-				const video = videoRef.current!;
-				const canvas = canvasRef.current!;
+				// We already checked these refs exist above
 				const context = canvas.getContext("2d");
 
 				if (!context) {
@@ -93,10 +98,8 @@ export const useCamera = (): UseCameraReturn => {
 				// Convert the canvas to a data URL
 				const photoUrl = canvas.toDataURL("image/jpeg");
 
-				// Update the photo element if it exists
-				if (photoRef.current) {
-					photoRef.current.src = photoUrl;
-				}
+				// Save the captured image in state
+				setCapturedImage(photoUrl);
 
 				resolve(photoUrl);
 			} catch (err) {
@@ -118,5 +121,6 @@ export const useCamera = (): UseCameraReturn => {
 		stopCamera,
 		takePicture,
 		error,
+		capturedImage,
 	};
 };

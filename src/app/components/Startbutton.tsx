@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 
-export default function FlashyButton() {
+export default function FlashyButton({ onClick }: { onClick?: () => void }) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -25,6 +25,7 @@ export default function FlashyButton() {
       whileTap={{ scale: 0.95 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      onClick={onClick}
     >
       <span className="relative z-10">Start</span>
       <motion.div
