@@ -1,13 +1,66 @@
+"use client";
+
 import React from "react";
 import { Cog, FlipHorizontal, Image, Zap } from "lucide-react";
+import { useEffect } from "react";
+import { useCamera } from "../hooks/useCamera";
 
 export default function Camera() {
+	const {
+		videoRef,
+		photoRef,
+		canvasRef,
+		isStreamActive,
+		error,
+		startCamera,
+		stopCamera,
+		takePicture,
+	} = useCamera();
+
+	useEffect(() => {
+		// Start camera when component mounts
+		startCamera();
+
+		// Clean up when component unmounts
+		return () => {
+			stopCamera();
+		};
+	}, []);
+
+	const handleTakePicture = async () => {
+		try {
+			const photoUrl = await takePicture();
+			console.log("Photo taken:", photoUrl);
+		} catch (err) {
+			console.error("Failed to take picture:", err);
+		}
+	};
+
+	const handleDownload = () => {
+		if (photoRef.current?.src) {
+			const a = document.createElement("a");
+			a.href = photoRef.current.src;
+			a.download = "photo.jpg";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+		}
+	};
+
 	return (
-		<div className="relative flex items-center justify-center w-full h-screen bg-black text-white overflow-hidden">
+		<div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-purple-400 to-blue-500 text-white overflow-hidden">
 			{/* Camera View */}
-			<div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-500">
-				{/* This div simulates the camera view */}
-			</div>
+			{error && <div className="text-red-500">{error}</div>}
+
+			<video
+				ref={videoRef}
+				autoPlay
+				playsInline
+				muted
+				className="w-full max-w-lg"
+			/>
+
+			<canvas ref={canvasRef} className="hidden" />
 
 			{/* Top Controls */}
 			<div className="absolute top-4 left-0 right-0 flex justify-between px-6">
@@ -22,13 +75,24 @@ export default function Camera() {
 			{/* Bottom Controls */}
 			<div className="absolute bottom-8 left-0 right-0">
 				<div className="flex justify-between items-center px-8">
-					<button className="p-2 rounded-full bg-black/30 backdrop-blur-md">
+					<button
+						type="button"
+						className="p-2 rounded-full bg-black/30 backdrop-blur-md"
+					>
 						<Image className="w-8 h-8" />
 					</button>
-					<button className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center">
-						<div className="w-16 h-16 rounded-full bg-white"></div>
+					{/* capture button */}
+					<button
+						type="button"
+						className="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center"
+						onClick={handleTakePicture}
+					>
+						<div className="w-16 h-16 rounded-full bg-white" />
 					</button>
-					<button className="p-2 rounded-full bg-black/30 backdrop-blur-md">
+					<button
+						type="button"
+						className="p-2 rounded-full bg-black/30 backdrop-blur-md"
+					>
 						<FlipHorizontal className="w-8 h-8" />
 					</button>
 				</div>

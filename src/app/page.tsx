@@ -56,9 +56,6 @@ export default function Component() {
         </CarouselContent>
       </Carousel>
 
-      {/* <Button className="mt-12 text-xl px-8 py-6 rounded-full bg-white text-purple-700 hover:bg-purple-100 transition-colors duration-300">
-        Start
-      </Button> */}
       <FlashyButton />
     </div>
   )
