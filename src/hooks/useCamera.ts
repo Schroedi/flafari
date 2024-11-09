@@ -29,9 +29,12 @@ export const useCamera = (): UseCameraReturn => {
 			for (const track of stream.getTracks()) {
 				console.log("stopping track", track);
 				track.stop();
+				stream.removeTrack(track);
 			}
 			if (videoRef.current) {
-				console.log("setting videoRef.current to null");
+				console.log("pausing video");
+				videoRef.current.pause();
+				videoRef.current.src = "";
 				videoRef.current.srcObject = null;
 			}
 			setStream(null);
