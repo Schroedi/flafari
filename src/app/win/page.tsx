@@ -57,6 +57,13 @@ export default function WinPage() {
 				<h1 className="text-center text-4xl font-bold text-white mt-10">
 					You did it!
 				</h1>
+                <button
+					type="button"
+					onClick={doShare}
+					className="bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2"
+				>
+					Share
+				</button>
 
 				<div className="relative mt-4">
 					{/* {loadedImage && loadedUserImage && (
@@ -78,13 +85,7 @@ export default function WinPage() {
 				{isClientMounted && (
 					<Score className="transform -translate-y-1/2 translate-x-1/3" />
 				)}
-				<button
-					type="button"
-					onClick={doShare}
-					className="bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2"
-				>
-					Share
-				</button>
+				
 			</div>
 		</div>
 	);
