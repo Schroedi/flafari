@@ -43,11 +43,10 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 					<div className="text-2xl">{comment}</div>
 					{score !== null && (
 						<div className="text-6xl font-bold text-fuchsia-900 font-mono tabular-nums neonText">
-							{score?.toString().padStart(4, "0")}
+							{score?.toString().padStart(4, "0")+"€"}
 						</div>
 					)}
-				</div>
-			
+				</div>			
 			</div>
 		</div>
 	);
