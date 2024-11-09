@@ -13,10 +13,28 @@ import Autoplay from "embla-carousel-autoplay";
 export default function Component() {
 	const router = useRouter();
 
+	
 	const images = Array.from(
 		{ length: 10 },
 		(_, i) => `/flaschen/flasche${i + 1}.webp`,
 	);
+	const bottleData = [
+		{ comment: "Bromance <3", score: 3500 },
+		{ comment: "Cool!", score: 640 },
+		{ comment: "Tatted", score: 5300 },
+		{ comment: "Schicker Hals", score: 1920 },
+		{ comment: "Sportlich", score: 6001 },
+		{ comment: "Gruppenfoto", score: 42 },
+		{ comment: "Echt Scharf", score: 7499 },
+		{ comment: "Mild & Wild", score: 2580 },
+		{ comment: "Chillout", score: 4200 },
+		{ comment: "Sauber.", score: 6000 },
+		{ comment: "Größte Flasche ever.", score: 9000 }
+	];
+
+
+
+
 
 	return (
 		<div className="flex flex-col items-center justify-between min-h-screen bg-gradient-to-b from-purple-500 to-indigo-700 p-8 text-white">
@@ -40,7 +58,11 @@ export default function Component() {
 				<CarouselContent>
 					{images.map((src, index) => (
 						<CarouselItem key={src} className="flex justify-center">
-							<Polaroid src={src} alt={`Slide ${index + 1}`} />
+							<Polaroid 
+								src={src}
+								alt={`Slide ${index + 1}`}								
+								comment={bottleData[index].comment}
+							/>
 						</CarouselItem>
 					))}
 				</CarouselContent>

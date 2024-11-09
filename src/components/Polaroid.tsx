@@ -5,11 +5,12 @@ interface PolaroidProps {
 	src: string;
 	alt: string;
 	className?: string;
+	comment?: string;
 }
 
-const Polaroid: FC<PolaroidProps> = ({ src, alt, className }) => {
+const Polaroid: FC<PolaroidProps> = ({ src, alt, className, comment }) => {
 	return (
-		<PolaroidFrame className={className}>
+		<PolaroidFrame className={className} comment={comment}>
 			<img src={src} alt={alt} className="object-cover w-[300px] h-[300px]" />
 		</PolaroidFrame>
 	);
@@ -18,11 +19,13 @@ const Polaroid: FC<PolaroidProps> = ({ src, alt, className }) => {
 interface PolaroidFrameProps {
 	children: React.ReactNode;
 	className?: string;
+	comment?: string;
 }
 
 export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 	children,
 	className,
+	comment = "Flascherazzi Moment",
 }) => {
 	return (
 		<div
@@ -33,7 +36,7 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 		>
 			{children}
 			<div className="mt-2 text-center text-gray-700 font-handwriting font-semibold text-2xl">
-				Flascherazzi Moment
+				{comment}
 			</div>
 		</div>
 	);
