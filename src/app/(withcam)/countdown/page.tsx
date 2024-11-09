@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
-import { useCameraContext } from "../contexts/CameraContext";
-import SelfieCounter from "../components/SelfieCounter";
+import { useCameraContext } from "../../../contexts/CameraContext";
+import SelfieCounter from "../../../components/SelfieCounter";
 
 export default function Countdown() {
 	const router = require("next/navigation").useRouter();

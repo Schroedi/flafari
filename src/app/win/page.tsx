@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Polaroid from "../components/Polaroid";
-import { useCameraContext } from "../contexts/CameraContext";
-import { useCamera } from "../hooks/useCamera";
+import Polaroid from "../../components/Polaroid";
 
 export default function WinPage() {
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);

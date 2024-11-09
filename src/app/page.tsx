@@ -8,8 +8,8 @@ import {
 	CarouselItem,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import FlashyButton from "./components/Startbutton";
-import Polaroid from "./components/Polaroid";
+import FlashyButton from "../components/Startbutton";
+import Polaroid from "../components/Polaroid";
 import { useRouter } from "next/navigation";
 
 export default function Component() {
