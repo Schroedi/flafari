@@ -66,6 +66,7 @@ export default function Score({ className }: { className?: string }) {
 	const [starCount, setStarCount] = useState(10);
 	const [isExploding, setIsExploding] = useState(false);
 	const controls = useAnimation();
+	const [scoreLevel, setScoreLevel] = useState(0);
 
 	const incrementScore = useCallback(() => {
 		setScore((prevScore) => {
@@ -83,30 +84,33 @@ export default function Score({ className }: { className?: string }) {
 		setStarSpeed(0.1 + score / 1000);
 		setStarCount(Math.min(10 + Math.floor(score / 50), 200));
 
-		if (score >= 100 && score % 100 === 0) {
+		if (score >= 100 && scoreLevel < 1) {
 			controls.start({
 				scale: [1, 1.2, 1],
+				rotate: [0, 10],
 				transition: { duration: 0.3 },
 			});
+			setScoreLevel(1);
 		}
 
-		if (score === 900) {
+		if (score >= 900 && scoreLevel < 2) {
 			controls.start({
-				rotate: [0, 360],
 				scale: [1, 1.5, 1],
+                rotate: [10, 320],
 				transition: { duration: 0.5 },
 			});
+			setScoreLevel(2);
 		}
 
-		if (score === 9000) {
+		if (score >= 9000 && scoreLevel < 3) {
 			setIsExploding(true);
 			controls.start({
-				rotate: [0, 720],
+				rotate: [0, 730],
 				scale: [1, 2, 1],
 				transition: { duration: 1 },
 			});
 		}
-	}, [score, controls]);
+	}, [score, controls, scoreLevel]);
 
 	return (
 		<div className={cn("text-center", className)}>
@@ -116,7 +120,7 @@ export default function Score({ className }: { className?: string }) {
 						animate={controls}
 						className="text-6xl font-bold text-fuchsia-900 font-mono tabular-nums z-10 neonText"
 					>
-						{score.toString().padStart(4, "0")}
+						{`${score.toString().padStart(4, "0")}€`}
 					</motion.div>
 				</div>
 				{Array.from({ length: starCount }).map((_, i) => (

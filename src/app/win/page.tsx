@@ -72,14 +72,15 @@ export default function WinPage() {
 						</>
 					)} */}
 					{loadedImage && loadedUserImage && (
-						<PolaroidFrame className="mt-10">
+						<PolaroidFrame className="mt-10" comment="Größte Flasche ever.">
 							<ImageBlender image1={loadedImage} image2={loadedUserImage} />
 						</PolaroidFrame>
 					)}
+					{isClientMounted && (
+						<Score className="transform -translate-y-[480px] translate-x-[70px]" />
+					)}
 				</div>
-				{isClientMounted && (
-					<Score className="transform -translate-y-1/2 translate-x-1/3" />
-				)}
+
 				<button
 					type="button"
 					onClick={doShare}
