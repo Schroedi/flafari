@@ -16,6 +16,7 @@ export function CameraProvider({ children }: { children: ReactNode }) {
 	// on unmount, stop the camera
 	useEffect(() => {
 		return () => {
+			console.log("unmounting");
 			cameraState.stopCamera();
 		};
 	}, []);
