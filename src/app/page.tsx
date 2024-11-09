@@ -45,8 +45,12 @@ export default function Component() {
 					))}
 				</CarouselContent>
 			</Carousel>
-
-			<FlashyButton onClick={() => router.push("/cam")} />
+			<div className="flex flex-col items-center  pb-16">
+				<p className=" text-center text-sm mb-4">
+        Du hast nun die exklusive Chance, den perfekten Schnappschuss zu landen.
+				</p>
+				<FlashyButton onClick={() => router.push("/cam")} />
+			</div>
 		</div>
 	);
 }
