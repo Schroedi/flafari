@@ -52,7 +52,7 @@ export default function WinPage() {
 					)}
 				</div>
 			</div>
-			{/* {isClientMounted && <Score className="absolute top-2/3 left-1/3" />} */}
+			{isClientMounted && <Score className="absolute top-2/3 left-1/3" />}
 		</div>
 	);
 }
