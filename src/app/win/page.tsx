@@ -45,8 +45,6 @@ export default function WinPage() {
 							</div>
 						</>
 					)} */}
-					{loadedImage && <p>got image</p>}
-					{loadedUserImage && <p>got user image</p>}
 					{loadedImage && loadedUserImage && (
 						<PolaroidFrame className="mt-10">
 							<ImageBlender image1={loadedImage} image2={loadedUserImage} />
