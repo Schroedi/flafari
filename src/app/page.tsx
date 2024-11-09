@@ -39,9 +39,11 @@ export default function Component() {
 	return (
 		<div className="flex flex-col items-center justify-between min-h-screen bg-gradient-to-b from-purple-500 to-indigo-700 p-8 text-white">
 			<div className="text-center space-y-6 mb-8">
-				<h1 className="text-6xl font-bold tracking-tighter sm:text-7xl">
-					Flascherazzi
-				</h1>
+				<img
+					src="/logo.webp"
+					alt="Flascherazzi Logo"
+					className="h-24 sm:h-32"
+				/>
 				{/* <p className="text-xl font-semibold bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2">
 					!Nur ein Versuch
 				</p> */}
