@@ -62,6 +62,7 @@ export default function Component() {
 								src={src}
 								alt={`Slide ${index + 1}`}								
 								comment={bottleData[index].comment}
+								score={bottleData[index].score}
 							/>
 						</CarouselItem>
 					))}
