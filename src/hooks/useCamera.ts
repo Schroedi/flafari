@@ -2,7 +2,6 @@ import { useState, useCallback, useRef } from "react";
 
 interface UseCameraReturn {
 	videoRef: React.RefObject<HTMLVideoElement>;
-	photoRef: React.RefObject<HTMLImageElement>;
 	canvasRef: React.RefObject<HTMLCanvasElement>;
 	stream: MediaStream | null;
 	isStreamActive: boolean;
@@ -16,7 +15,6 @@ interface UseCameraReturn {
 
 export const useCamera = (): UseCameraReturn => {
 	const videoRef = useRef<HTMLVideoElement>(null);
-	const photoRef = useRef<HTMLImageElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const [stream, setStream] = useState<MediaStream | null>(null);
 	const [error, setError] = useState<string | null>(null);
@@ -124,7 +122,6 @@ export const useCamera = (): UseCameraReturn => {
 
 	return {
 		videoRef,
-		photoRef,
 		canvasRef,
 		stream,
 		isStreamActive,

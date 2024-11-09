@@ -8,7 +8,6 @@ import { useCameraContext } from "../contexts/CameraContext";
 export default function Camera() {
 	const {
 		videoRef,
-		photoRef,
 		error,
 		startCamera,
 	} = useCameraContext();
@@ -28,16 +27,16 @@ export default function Camera() {
 		}
 	};
 
-	const handleDownload = () => {
-		if (photoRef.current?.src) {
-			const a = document.createElement("a");
-			a.href = photoRef.current.src;
-			a.download = "photo.jpg";
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		}
-	};
+	// const handleDownload = () => {
+	// 	if (photoRef.current?.src) {
+	// 		const a = document.createElement("a");
+	// 		a.href = photoRef.current.src;
+	// 		a.download = "photo.jpg";
+	// 		document.body.appendChild(a);
+	// 		a.click();
+	// 		document.body.removeChild(a);
+	// 	}
+	// };
 
 	return (
 		<>
