@@ -40,7 +40,7 @@ export default function Component() {
 		<div className="flex flex-col items-center justify-between min-h-screen bg-gradient-to-b from-purple-500 to-indigo-700 p-8 text-white">
 			<div className="text-center space-y-6 mb-8">
 				<img
-					src="/logo.webp"
+					src="/Logo.webp"
 					alt="Flascherazzi Logo"
 					className="h-24 sm:h-32"
 				/>
