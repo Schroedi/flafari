@@ -34,7 +34,7 @@ export default function WinPage() {
 					You did it!
 				</h1>
 
-				<div className="relative mt-10">
+				<div className="relative mt-4">
 					{/* {loadedImage && loadedUserImage && (
 						<>
 							<div className="absolute inset-0 transition-opacity duration-1000 ease-in-out animate-fade-in-out">
@@ -51,8 +51,10 @@ export default function WinPage() {
 						</PolaroidFrame>
 					)}
 				</div>
+				{isClientMounted && (
+					<Score className="transform -translate-y-1/2 translate-x-1/3" />
+				)}
 			</div>
-			{isClientMounted && <Score className="absolute top-2/3 left-1/3" />}
 		</div>
 	);
 }
