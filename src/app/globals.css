@@ -120,3 +120,8 @@ html,body {
     0 0 151px #bc13fe; */
 }
 
+
+@font-face {
+  font-family: "Caveat";
+  src: url("./fonts/Caveat.woff") format("woff");
+}
