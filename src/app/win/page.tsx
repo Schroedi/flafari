@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Polaroid, { PolaroidFrame } from "../../components/Polaroid";
 import Score from "@/components/Score";
 import ImageBlender from "@/components/ImageBlender";
@@ -26,6 +26,30 @@ export default function WinPage() {
 	useEffect(() => {
 		setIsClientMounted(true);
 	}, []);
+
+	const doShare = useCallback(() => {
+		console.log("doShare");
+		if (loadedImage) {
+			console.log("loadedImage", loadedImage);
+			const imageBlob = fetch(loadedImage).then((res) => res.blob());
+			imageBlob.then((blob) => {
+				const file = new File([blob], "flascherazzi.jpg", {
+					type: "image/jpeg",
+				});
+
+				if (navigator.canShare?.({ files: [file] })) {
+					navigator
+						.share({
+							files: [file],
+							title: "Flascherazzi",
+							text: "Ich habe die Flascherazzi geschafft!",
+						})
+						.then(() => console.log("Share was successful."))
+						.catch((error) => console.log("Sharing failed", error));
+				}
+			});
+		}
+	}, [loadedImage]);
 
 	return (
 		<div className="">
@@ -54,6 +78,13 @@ export default function WinPage() {
 				{isClientMounted && (
 					<Score className="transform -translate-y-1/2 translate-x-1/3" />
 				)}
+				<button
+					type="button"
+					onClick={doShare}
+					className="bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2"
+				>
+					Share
+				</button>
 			</div>
 		</div>
 	);
