@@ -12,8 +12,8 @@ export default function Countdown() {
 	useEffect(() => {
 		const capturePhoto = async () => {
 			try {
-				// wait 1 second to make sure the animation is smooth
-				await new Promise((resolve) => setTimeout(resolve, 1000));
+				// wait to make sure the animation is smooth
+				await new Promise((resolve) => setTimeout(resolve, 500));
 				await takePicture("user");
 			} catch (error) {
 				console.error("Failed to take picture:", error);
