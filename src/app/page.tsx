@@ -69,7 +69,7 @@ export default function Component() {
 			</Carousel>
 			<div className="flex flex-col items-center  pb-16">
 				<p className="text-center mb-4 text-balance text-lg">
-					Du hast nun die exklusive Chance, den perfekten Schnappschuss zu
+					Die exklusive Chance, den perfekten Schnapsschuss zu
 					landen.
 				</p>
 				<FlashyButton onClick={() => router.push("/cam")} />

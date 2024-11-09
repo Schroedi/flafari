@@ -14,6 +14,7 @@ const useImage = (src: string): HTMLImageElement | null => {
 };
 
 const calculateDrawParams = (img: HTMLImageElement, canvasRatio: number) => {
+    // we might want to cut off the upper part to keep the face in the image
 	const imgRatio = img.width / img.height;
 	const sx = imgRatio > canvasRatio ? (img.width - img.height * canvasRatio) / 2 : 0;
 	const sy = imgRatio > canvasRatio ? 0 : (img.height - img.width / canvasRatio) / 2;
