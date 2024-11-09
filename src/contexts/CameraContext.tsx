@@ -22,7 +22,9 @@ export function CameraProvider({ children }: { children: ReactNode }) {
 
 	return (
 		<CameraContext.Provider value={cameraState}>
-			<canvas ref={cameraState.canvasRef} className="hidden" />
+			<div className="hidden">
+				<canvas ref={cameraState.canvasRef} />
+			</div>
 			{children}
 		</CameraContext.Provider>
 	);
