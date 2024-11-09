@@ -24,11 +24,6 @@ export default function Camera() {
 	useEffect(() => {
 		// Start camera when component mounts
 		startCamera();
-
-		// Clean up when component unmounts
-		return () => {
-			stopCamera();
-		};
 	}, []);
 
 	const handleTakePicture = async () => {
