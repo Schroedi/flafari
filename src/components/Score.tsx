@@ -70,10 +70,11 @@ export default function Score({ className }: { className?: string }) {
 
 	const incrementScore = useCallback(() => {
 		setScore((prevScore) => {
-			const newScore = prevScore + Math.floor(prevScore / 100) + 10;
+			const scoreIncrement = (Math.floor(prevScore / 100) + 10) * (scoreLevel ** 2 + 1);
+			const newScore = prevScore + scoreIncrement;
 			return Math.min(newScore, 9000);
 		});
-	}, []);
+	}, [scoreLevel]);
 
 	useEffect(() => {
 		const interval = setInterval(incrementScore, 50);
@@ -96,7 +97,7 @@ export default function Score({ className }: { className?: string }) {
 		if (score >= 900 && scoreLevel < 2) {
 			controls.start({
 				scale: [1, 1.5, 1],
-                rotate: [10, 320],
+				rotate: [10, 320],
 				transition: { duration: 0.5 },
 			});
 			setScoreLevel(2);

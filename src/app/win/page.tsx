@@ -84,7 +84,7 @@ export default function WinPage() {
 				<button
 					type="button"
 					onClick={doShare}
-					className="fixed bottom-4 left-1/2 -translate-x-1/2 -translate-y-10 bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2"
+					className="fixed bottom-4 left-1/2 -translate-x-1/2 -translate-y-10 bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
 				>
 					Share <Share className="inline-block ml-1" size={16} />
 				</button>
