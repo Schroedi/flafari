@@ -1,25 +1,19 @@
 "use client";
 
-import React from "react";
 import { Cog, FlipHorizontal, Image, Zap } from "lucide-react";
+import React from "react";
 import { useEffect } from "react";
-import { useCamera } from "../hooks/useCamera";
-import SelfieCounter from "./SelfieCounter";
 import { useCameraContext } from "../contexts/CameraContext";
 
 export default function Camera() {
 	const {
 		videoRef,
 		photoRef,
-		canvasRef,
-		isStreamActive,
 		error,
 		startCamera,
-		stopCamera,
-		takePicture,
 	} = useCameraContext();
 
-    const router = require("next/navigation").useRouter();
+	const router = require("next/navigation").useRouter();
 
 	useEffect(() => {
 		// Start camera when component mounts
@@ -28,8 +22,6 @@ export default function Camera() {
 
 	const handleTakePicture = async () => {
 		try {
-			// const photoUrl = await takePicture();
-			// console.log("Photo taken:", photoUrl);
 			router.push("/countdown");
 		} catch (err) {
 			console.error("Failed to take picture:", err);
@@ -63,10 +55,10 @@ export default function Camera() {
 
 				{/* Top Controls */}
 				<div className="absolute top-4 left-0 right-0 flex justify-between px-6">
-					<button className="p-2 rounded-full bg-black/30 backdrop-blur-md">
+					<button type="button" className="p-2 rounded-full bg-black/30 backdrop-blur-md">
 						<Zap className="w-6 h-6" />
 					</button>
-					<button className="p-2 rounded-full bg-black/30 backdrop-blur-md">
+					<button type="button" className="p-2 rounded-full bg-black/30 backdrop-blur-md">
 						<Cog className="w-6 h-6" />
 					</button>
 				</div>
