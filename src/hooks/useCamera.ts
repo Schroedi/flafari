@@ -42,9 +42,9 @@ export const useCamera = (): UseCameraReturn => {
 	const startCamera = useCallback(
 		async (facingMode: "user" | "environment" = "environment") => {
 			try {
-				// if (stream) {
-				// 	stopCamera();
-				// }
+				if (stream) {
+					stopCamera();
+				}
 
 				const newStream = await navigator.mediaDevices.getUserMedia({
 					video: {
@@ -52,8 +52,6 @@ export const useCamera = (): UseCameraReturn => {
 					},
 				});
 
-				console.log("newStream", newStream);
-				console.log("videoRef.current", videoRef.current);
 				if (videoRef.current) {
 					videoRef.current.srcObject = newStream;
 				}

@@ -14,7 +14,7 @@ export default function Component({ onComplete }: ComponentProps) {
 
 	useEffect(() => {
 		if (count > 0) {
-			const timer = setTimeout(() => setCount(count - 1), 1000);
+			const timer = setTimeout(() => setCount(count - 1), 500);
 			return () => clearTimeout(timer);
 		}
 		setIsComplete(true);
@@ -57,7 +57,7 @@ export default function Component({ onComplete }: ComponentProps) {
 									initial={{ pathLength: 0 }}
 									animate={{ pathLength: 1 }}
 									transition={{
-										duration: 1,
+										duration: 0.5,
 										ease: "linear",
 										repeat: Number.POSITIVE_INFINITY,
 									}}
