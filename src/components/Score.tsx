@@ -16,7 +16,7 @@ const StarParticle = ({
 
 	return (
 		<motion.div
-			className="absolute bg-white rounded-full"
+			className="absolute rounded-full"
 			style={{
 				width: "4px",
 				height: "4px",
@@ -24,6 +24,7 @@ const StarParticle = ({
 				top: "50%",
 				x: initialX,
 				y: initialY,
+				background: "white",
 			}}
 			animate={
 				isExploding
@@ -31,11 +32,21 @@ const StarParticle = ({
 							x: [initialX, 0],
 							y: [initialY, 0],
 							opacity: [1, 0],
+							background: [
+								"rgb(255, 255, 255)",
+								"rgb(255, 200, 100)",
+								"rgb(255, 100, 50)",
+							],
 						}
 					: {
 							x: 0,
 							y: 0,
 							opacity: [1, 0],
+							background: [
+								"rgb(255, 255, 255)",
+								"rgb(100, 200, 255)",
+								"rgb(150, 100, 255)",
+							],
 						}
 			}
 			transition={{
@@ -103,9 +114,9 @@ export default function Score({ className }: { className?: string }) {
 				<div className="absolute inset-0 flex items-center justify-center">
 					<motion.div
 						animate={controls}
-						className="text-6xl font-bold font-mono tabular-nums z-10"
+						className="text-6xl font-bold text-fuchsia-900 font-mono tabular-nums z-10 neonText"
 					>
-						{score.toLocaleString().padStart(5, "0")}
+						{score.toString().padStart(4, "0")}
 					</motion.div>
 				</div>
 				{Array.from({ length: starCount }).map((_, i) => (
