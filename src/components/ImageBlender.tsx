@@ -51,14 +51,12 @@ export default function ImageBlender({
 			const elapsedTime = timestamp - startTime;
 			const newProgress = Math.min(elapsedTime / duration, 1);
 			setProgress(newProgress);
-			// Set clear color to white
+
+			// clear white as otherwise blending will not be correct
 			ctx.globalAlpha = 1;
 			ctx.fillStyle = "white";
 			ctx.fillRect(0, 0, width, height);
-			// ctx.clearRect(0, 0, width, height);
 
-			// increase the opacity during the first 40% of the animation
-			const opacity = newProgress <= 0.7 ? (newProgress / 0.7) * 1 : 1;
 			ctx.globalAlpha = 0.5 - Math.cos(newProgress * Math.PI) / 2;
 
 			// Draw the first image
