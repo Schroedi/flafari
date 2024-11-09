@@ -26,7 +26,7 @@ interface ImageBlenderProps {
 export default function ImageBlender({
 	image1,
 	image2,
-	width = 400,
+	width = 300,
 	height = 300,
 	duration = 5000,
 }: ImageBlenderProps) {
@@ -49,31 +49,31 @@ export default function ImageBlender({
 		const animate = (timestamp: number) => {
 			if (!startTime) startTime = timestamp;
 			const elapsedTime = timestamp - startTime;
-			const newProgress = Math.min((elapsedTime / duration) ** 2, 1);
+			const newProgress = Math.min(elapsedTime / duration, 1);
 			setProgress(newProgress);
 			// Set clear color to white
+			ctx.globalAlpha = 1;
 			ctx.fillStyle = "white";
 			ctx.fillRect(0, 0, width, height);
 			// ctx.clearRect(0, 0, width, height);
 
 			// increase the opacity during the first 40% of the animation
-			const opacity = newProgress <= 0.40 ? (newProgress / 0.40) * 1 : 1;
-			ctx.globalAlpha = opacity;
+			const opacity = newProgress <= 0.7 ? (newProgress / 0.7) * 1 : 1;
+			ctx.globalAlpha = 0.5 - Math.cos(newProgress * Math.PI) / 2;
 
 			// Draw the first image
 			ctx.drawImage(img1, 0, 0, width, height);
 
 			// Apply saturation
-			const saturation = newProgress <= 0.70 ? (newProgress / 0.70) * 1 : 1;
+			const saturation = newProgress <= 0.7 ? (newProgress / 0.7) * 1 : 1;
 			ctx.filter = `saturate(${saturation * 100}%)`;
 			ctx.drawImage(canvas, 0, 0);
 			ctx.filter = "none";
 
-			if (newProgress > 0.70) {
-				const blendProgress = (newProgress - 0.70) / 0.30;
+			if (newProgress > 0.7) {
+				const blendProgress = (newProgress - 0.7) / 0.3;
 				ctx.globalAlpha = blendProgress;
 				ctx.drawImage(img2, 0, 0, width, height);
-				ctx.globalAlpha = 1;
 			}
 
 			if (newProgress < 1) {

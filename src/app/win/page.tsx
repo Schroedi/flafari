@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Polaroid from "../../components/Polaroid";
+import Polaroid, { PolaroidFrame } from "../../components/Polaroid";
 import Score from "@/components/Score";
 import ImageBlender from "@/components/ImageBlender";
 
@@ -46,12 +46,9 @@ export default function WinPage() {
 						</>
 					)} */}
 					{loadedImage && loadedUserImage && (
-						<div className="mt-10">
-							<ImageBlender
-								image1={loadedImage}
-								image2={loadedUserImage}
-							/>
-						</div>
+						<PolaroidFrame className="mt-10">
+							<ImageBlender image1={loadedImage} image2={loadedUserImage} />
+						</PolaroidFrame>
 					)}
 				</div>
 			</div>
