@@ -11,12 +11,13 @@ import Image from "next/image";
 import FlashyButton from "../components/Startbutton";
 import Polaroid from "../components/Polaroid";
 import { useRouter } from "next/navigation";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function Component() {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const totalSlides = 3;
 
-  const router = useRouter();
+	const router = useRouter();
 
 	const images = Array.from(
 		{ length: 10 },
@@ -42,7 +43,14 @@ export default function Component() {
 				</p>
 			</div>
 
-			<Carousel className="w-full max-w-md">
+			<Carousel
+				className="w-full max-w-md"
+				plugins={[
+					Autoplay({
+						delay: 2000,
+					}),
+				]}
+			>
 				<CarouselContent>
 					{images.map((src, index) => (
 						<CarouselItem key={src} className="flex justify-center">
