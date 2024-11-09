@@ -10,7 +10,6 @@ export default function WinPage() {
         const savedImage = localStorage.getItem("capturedImage");
 		if (savedImage) {
 			setLoadedImage(savedImage);
-			console.log("loadedImage", savedImage);
 		}
 	}, []);
 
