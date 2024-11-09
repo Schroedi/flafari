@@ -42,9 +42,9 @@ export const useCamera = (): UseCameraReturn => {
 	const startCamera = useCallback(
 		async (facingMode: "user" | "environment" = "environment") => {
 			try {
-				if (stream) {
-					stopCamera();
-				}
+				// if (stream) {
+				// 	stopCamera();
+				// }
 
 				const newStream = await navigator.mediaDevices.getUserMedia({
 					video: {
@@ -76,8 +76,15 @@ export const useCamera = (): UseCameraReturn => {
 		const canvas = canvasRef.current;
 		const video = videoRef.current;
 		if (!video || !canvas) {
-			throw new Error(`Video or canvas reference not available: ${video} ${canvas}`);
+			throw new Error(
+				`Video or canvas reference not available: ${video} ${canvas}`,
+			);
 		}
+		// switch to user facing mode
+		await startCamera("user");
+
+        // Wait a bit for camera to adjust
+        await new Promise(resolve => setTimeout(resolve, 500));
 
 		return new Promise((resolve, reject) => {
 			try {
@@ -108,7 +115,7 @@ export const useCamera = (): UseCameraReturn => {
 				);
 			}
 		});
-	}, []);
+	}, [startCamera]);
 
 	return {
 		videoRef,

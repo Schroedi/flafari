@@ -1,14 +1,46 @@
 "use client";
 
+import { useEffect, useMemo } from "react";
+import { useCameraContext } from "../contexts/CameraContext";
 import SelfieCounter from "../components/SelfieCounter";
 
 export default function Countdown() {
 	const router = require("next/navigation").useRouter();
+
+	const { takePicture, videoRef } = useCameraContext();
+
+	useEffect(() => {
+		const capturePhoto = async () => {
+			try {
+				await takePicture();
+			} catch (error) {
+				console.error("Failed to take picture:", error);
+			}
+		};
+
+		capturePhoto();
+	}, [takePicture]);
+
+	const counterMemo = useMemo(() => {
+		return (
+			<SelfieCounter
+				onComplete={() => {
+					router.push("/win");
+				}}
+			/>
+		);
+	}, [router]);
 	return (
-		<SelfieCounter
-			onComplete={() => {
-				router.push("/win");
-			}}
-		/>
+		<>
+			<video
+				ref={videoRef}
+				autoPlay
+				playsInline
+				muted
+				className="z-0 w-full h-full"
+			/>
+
+			{counterMemo}
+		</>
 	);
 }

@@ -28,8 +28,8 @@ export default function Camera() {
 
 	const handleTakePicture = async () => {
 		try {
-			const photoUrl = await takePicture();
-			console.log("Photo taken:", photoUrl);
+			// const photoUrl = await takePicture();
+			// console.log("Photo taken:", photoUrl);
 			router.push("/countdown");
 		} catch (err) {
 			console.error("Failed to take picture:", err);
@@ -58,10 +58,8 @@ export default function Camera() {
 					autoPlay
 					playsInline
 					muted
-					className="w-full max-w-lg"
+					className="w-full h-full"
 				/>
-
-				<canvas ref={canvasRef} className="hidden" />
 
 				{/* Top Controls */}
 				<div className="absolute top-4 left-0 right-0 flex justify-between px-6">

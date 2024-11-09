@@ -22,7 +22,7 @@ export default function Component({ onComplete }: ComponentProps) {
 	}, [count, onComplete]);
 
 	return (
-		<div className="flex items-center justify-center h-screen bg-gradient-to-br from-purple-700 to-pink-500">
+		<div className="absolute inset-0 z-10 flex items-center justify-center h-screen bg-gradient-to-br from-purple-700 to-pink-500">
 			<div className="relative w-64 h-64">
 				<AnimatePresence mode="wait">
 					{!isComplete ? (
