@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, type ReactNode } from "react";
 import { useCamera } from "../hooks/useCamera";
 
 // Define the context type using the existing UseCameraReturn interface
@@ -10,8 +10,15 @@ type CameraContextType = ReturnType<typeof useCamera>;
 const CameraContext = createContext<CameraContextType | null>(null);
 
 // Create the provider component
-export function CameraProvider({ children }: { children: React.ReactNode }) {
+export function CameraProvider({ children }: { children: ReactNode }) {
 	const cameraState = useCamera();
+
+	// on unmount, stop the camera
+	useEffect(() => {
+		return () => {
+			cameraState.stopCamera();
+		};
+	}, []);
 
 	return (
 		<CameraContext.Provider value={cameraState}>
