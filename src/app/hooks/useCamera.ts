@@ -83,8 +83,8 @@ export const useCamera = (): UseCameraReturn => {
 		// switch to user facing mode
 		await startCamera("user");
 
-        // Wait a bit for camera to adjust
-        await new Promise(resolve => setTimeout(resolve, 500));
+		// Wait a bit for camera to adjust
+		await new Promise((resolve) => setTimeout(resolve, 500));
 
 		return new Promise((resolve, reject) => {
 			try {
@@ -107,6 +107,11 @@ export const useCamera = (): UseCameraReturn => {
 
 				// Save the captured image in state
 				setCapturedImage(photoUrl);
+
+				// save the image to local storage
+				if (photoUrl) {
+					localStorage.setItem("capturedImage", photoUrl);
+				}
 
 				resolve(photoUrl);
 			} catch (err) {

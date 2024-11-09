@@ -15,13 +15,14 @@ export default function Countdown() {
 				// wait 1 second to make sure the animation is smooth
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 				await takePicture();
+                
 			} catch (error) {
 				console.error("Failed to take picture:", error);
 			}
 		};
 
 		capturePhoto();
-	}, [takePicture]);
+	}, []);
 
 	const counterMemo = useMemo(() => {
 		return (
