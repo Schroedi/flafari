@@ -37,6 +37,11 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 			{children}
 			<div className="mt-2 text-center text-gray-700 font-handwriting font-semibold text-2xl">
 				{comment}
+				<div
+					className="text-6xl font-bold text-fuchsia-900 font-mono tabular-nums neonText"
+				>
+					{(999).toString().padStart(4, "0")}
+				</div>
 			</div>
 		</div>
 	);
