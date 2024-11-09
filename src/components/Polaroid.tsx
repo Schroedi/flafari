@@ -38,15 +38,15 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 			)}
 		>
 			{children}
-			<div className="mt-2 text-center text-gray-700 font-handwriting font-semibold text-2xl">
-				<div className="flex items-center justify-center gap-4">
-					<div className="text-2xl">{comment}</div>
-					{score !== null && (
-						<div className="text-6xl font-bold text-fuchsia-900 font-mono tabular-nums neonText">
-							{score?.toString().padStart(4, "0")+"€"}
-						</div>
-					)}
-				</div>			
+			<div className="relative">
+				{score !== null && (
+					<div className="absolute bottom-[50px] left-1/2 transform -rotate-6 -translate-x-1/4 text-6xl font-bold text-fuchsia-900 font-mono tabular-nums neonText z-10">
+						{score?.toString().padStart(4, "0")+"€"}
+					</div>
+				)}
+				<div className="mt-2 text-center text-gray-700 font-handwriting font-semibold text-4xl">
+					<div className="text-3xl">{comment}</div>
+				</div>
 			</div>
 		</div>
 	);
