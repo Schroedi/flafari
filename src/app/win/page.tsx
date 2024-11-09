@@ -21,10 +21,16 @@ export default function WinPage() {
 
 	return (
 		<div className="">
-			<div className="flex items-center justify-center h-screen bg-gradient-to-br from-purple-700 to-pink-500">
-				{loadedImage && <Polaroid src={loadedImage} alt="Captured" />}
+			<div className="flex flex-col items-center h-screen bg-gradient-to-br from-purple-700 to-pink-500">
+				<h1 className="text-center text-4xl font-bold text-white mt-10">
+					You did it!
+				</h1>
+
+				{loadedImage && (
+					<Polaroid src={loadedImage} alt="Captured" className="mt-10" />
+				)}
 			</div>
-			{isClientMounted && <Score className="absolute top-1/2 left-1/3" />}
+			{isClientMounted && <Score className="absolute top-2/3 left-1/3" />}
 		</div>
 	);
 }
