@@ -18,8 +18,8 @@ const StarParticle = ({
 		<motion.div
 			className="absolute bg-white rounded-full"
 			style={{
-				width: `${Math.random() * 3 + 1}px`,
-				height: "1px",
+				width: "4px",
+				height: "4px",
 				left: "50%",
 				top: "50%",
 				x: initialX,
