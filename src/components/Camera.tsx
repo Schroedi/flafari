@@ -1,17 +1,11 @@
 "use client";
 
-import { Cog, FlipHorizontal, Image, Zap } from "lucide-react";
 import React from "react";
 import { useEffect } from "react";
 import { useCameraContext } from "../contexts/CameraContext";
 
 export default function Camera() {
-	const {
-		videoRef,
-		error,
-		startCamera,
-		takePicture,
-	} = useCameraContext();
+	const { videoRef, error, startCamera, takePicture } = useCameraContext();
 
 	const router = require("next/navigation").useRouter();
 
@@ -54,25 +48,9 @@ export default function Camera() {
 					className="w-full h-full"
 				/>
 
-				{/* Top Controls */}
-				<div className="absolute top-4 left-0 right-0 flex justify-between px-6">
-					<button type="button" className="p-2 rounded-full bg-black/30 backdrop-blur-md">
-						<Zap className="w-6 h-6" />
-					</button>
-					<button type="button" className="p-2 rounded-full bg-black/30 backdrop-blur-md">
-						<Cog className="w-6 h-6" />
-					</button>
-				</div>
-
 				{/* Bottom Controls */}
 				<div className="absolute bottom-8 left-0 right-0">
-					<div className="flex justify-between items-center px-8">
-						<button
-							type="button"
-							className="p-2 rounded-full bg-black/30 backdrop-blur-md"
-						>
-							<Image className="w-8 h-8" />
-						</button>
+					<div className="flex justify-center items-center px-8">
 						{/* capture button */}
 						<button
 							type="button"
@@ -80,12 +58,6 @@ export default function Camera() {
 							onClick={handleTakePicture}
 						>
 							<div className="w-16 h-16 rounded-full bg-white" />
-						</button>
-						<button
-							type="button"
-							className="p-2 rounded-full bg-black/30 backdrop-blur-md"
-						>
-							<FlipHorizontal className="w-8 h-8" />
 						</button>
 					</div>
 					<div className="mt-6 flex justify-center">
