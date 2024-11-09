@@ -3,15 +3,23 @@
 import { useEffect, useState } from "react";
 import Polaroid from "../../components/Polaroid";
 import Score from "@/components/Score";
+import ImageBlender from "@/components/ImageBlender";
 
 export default function WinPage() {
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
+	const [loadedUserImage, setLoadedUserImage] = useState<string | null>(null);
 	const [isClientMounted, setIsClientMounted] = useState(false);
 
 	useEffect(() => {
-		const savedImage = localStorage.getItem("capturedImage");
+		const savedImage = localStorage.getItem("capturedImage-environment");
 		if (savedImage) {
+			console.log("savedImage", savedImage);
 			setLoadedImage(savedImage);
+		}
+		const savedUserImage = localStorage.getItem("capturedImage-user");
+		if (savedUserImage) {
+			console.log("savedUserImage", savedUserImage);
+			setLoadedUserImage(savedUserImage);
 		}
 	}, []);
 
@@ -26,11 +34,28 @@ export default function WinPage() {
 					You did it!
 				</h1>
 
-				{loadedImage && (
-					<Polaroid src={loadedImage} alt="Captured" className="mt-10" />
-				)}
+				<div className="relative mt-10">
+					{/* {loadedImage && loadedUserImage && (
+						<>
+							<div className="absolute inset-0 transition-opacity duration-1000 ease-in-out animate-fade-in-out">
+								<Polaroid src={loadedImage} alt="Environment shot" />
+							</div>
+							<div className="absolute inset-0 transition-opacity duration-1000 ease-in-out animate-fade-in-out-delayed">
+								<Polaroid src={loadedUserImage} alt="Selfie shot" />
+							</div>
+						</>
+					)} */}
+					{loadedImage && loadedUserImage && (
+						<div className="mt-10">
+							<ImageBlender
+								image1={loadedImage}
+								image2={loadedUserImage}
+							/>
+						</div>
+					)}
+				</div>
 			</div>
-			{isClientMounted && <Score className="absolute top-2/3 left-1/3" />}
+			{/* {isClientMounted && <Score className="absolute top-2/3 left-1/3" />} */}
 		</div>
 	);
 }

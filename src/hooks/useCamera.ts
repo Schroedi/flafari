@@ -8,7 +8,7 @@ interface UseCameraReturn {
 	currentFacingMode: "user" | "environment";
 	startCamera: (facingMode?: "user" | "environment") => Promise<void>;
 	stopCamera: () => void;
-	takePicture: () => Promise<string>;
+	takePicture: (facingMode?: "user" | "environment") => Promise<string>;
 	error: string | null;
 	capturedImage: string | null;
 }
@@ -73,55 +73,61 @@ export const useCamera = (): UseCameraReturn => {
 		[stream, stopCamera],
 	);
 
-	const takePicture = useCallback(async (): Promise<string> => {
-		const canvas = canvasRef.current;
-		const video = videoRef.current;
-		if (!video || !canvas) {
-			throw new Error(
-				`Video or canvas reference not available: ${video} ${canvas}`,
-			);
-		}
-		// switch to user facing mode
-		await startCamera("user");
-
-		// Wait a bit for camera to adjust
-		await new Promise((resolve) => setTimeout(resolve, 500));
-
-		return new Promise((resolve, reject) => {
-			try {
-				// We already checked these refs exist above
-				const context = canvas.getContext("2d");
-
-				if (!context) {
-					throw new Error("Could not get canvas context");
-				}
-
-				// Set canvas dimensions to match video
-				canvas.width = video.videoWidth;
-				canvas.height = video.videoHeight;
-
-				// Draw the video frame to the canvas
-				context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-				// Convert the canvas to a data URL
-				const photoUrl = canvas.toDataURL("image/jpeg");
-
-				// Save the captured image in state
-				setCapturedImage(photoUrl);
-
-				// save the image to local storage
-				if (photoUrl) {
-					localStorage.setItem("capturedImage", photoUrl);
-				}
-
-				resolve(photoUrl);
-			} catch (err) {
-				reject(
-					`Error taking picture: ${err instanceof Error ? err.message : String(err)}`,
+	const takePicture = useCallback(
+		async (
+			facingMode: "user" | "environment" = "environment",
+		): Promise<string> => {
+			const canvas = canvasRef.current;
+			const video = videoRef.current;
+			if (!video || !canvas) {
+				throw new Error(
+					`Video or canvas reference not available: ${video} ${canvas}`,
 				);
 			}
-		});
-	}, [startCamera]);
+
+			if (facingMode !== currentFacingMode) {
+				await startCamera(facingMode);
+				// Wait a bit for camera to adjust
+				await new Promise((resolve) => setTimeout(resolve, 500));
+			}
+
+			return new Promise((resolve, reject) => {
+				try {
+					// We already checked these refs exist above
+					const context = canvas.getContext("2d");
+
+					if (!context) {
+						throw new Error("Could not get canvas context");
+					}
+
+					// Set canvas dimensions to match video
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+
+					// Draw the video frame to the canvas
+					context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+					// Convert the canvas to a data URL
+					const photoUrl = canvas.toDataURL("image/jpeg");
+
+					// Save the captured image in state
+					setCapturedImage(photoUrl);
+
+					// save the image to local storage
+					if (photoUrl) {
+						localStorage.setItem(`capturedImage-${facingMode}`, photoUrl);
+					}
+
+					resolve(photoUrl);
+				} catch (err) {
+					reject(
+						`Error taking picture: ${err instanceof Error ? err.message : String(err)}`,
+					);
+				}
+			});
+		},
+		[currentFacingMode, startCamera],
+	);
 
 	return {
 		videoRef,

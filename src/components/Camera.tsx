@@ -10,6 +10,7 @@ export default function Camera() {
 		videoRef,
 		error,
 		startCamera,
+		takePicture,
 	} = useCameraContext();
 
 	const router = require("next/navigation").useRouter();
@@ -21,6 +22,7 @@ export default function Camera() {
 
 	const handleTakePicture = async () => {
 		try {
+			await takePicture("environment");
 			router.push("/countdown");
 		} catch (err) {
 			console.error("Failed to take picture:", err);
