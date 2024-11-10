@@ -15,7 +15,7 @@ export default function WinPage() {
 	const progress = useRef(0);
 	const [progressState, setProgressState] = useState(0);
 
-	const duration = 5000;
+	const duration = 10000;
 
 	useEffect(() => {
 		let animationFrameId: number;
@@ -86,16 +86,6 @@ export default function WinPage() {
 			</h1>
 
 			<div className="relative mt-4">
-				{/* {loadedImage && loadedUserImage && (
-						<>
-							<div className="absolute inset-0 transition-opacity duration-1000 ease-in-out animate-fade-in-out">
-								<Polaroid src={loadedImage} alt="Environment shot" />
-							</div>
-							<div className="absolute inset-0 transition-opacity duration-1000 ease-in-out animate-fade-in-out-delayed">
-								<Polaroid src={loadedUserImage} alt="Selfie shot" />
-							</div>
-						</>
-					)} */}
 				{loadedImage && loadedUserImage && (
 					<PolaroidFrame
 						comment={progressState > 0.9 ? "Größte Flasche ever." : ""}

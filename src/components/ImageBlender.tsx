@@ -66,6 +66,9 @@ export default function ImageBlender({
 			ctx.fillStyle = "white";
 			ctx.fillRect(0, 0, width, height);
 
+            const saturation = (0.5 - Math.cos(progress.current * Math.PI) / 2) * 100;
+			ctx.filter = `saturate(${saturation}%)`;
+
 			// Draw first image
 			ctx.globalAlpha = 0.5 - Math.cos(progress.current * Math.PI) / 2;
 			ctx.drawImage(
@@ -80,15 +83,9 @@ export default function ImageBlender({
 				height,
 			);
 
-			// Apply saturation
-			const saturation = Math.min(progress.current / 0.7, 1) * 100;
-			ctx.filter = `saturate(${saturation}%)`;
-			ctx.drawImage(canvas, 0, 0);
-			ctx.filter = "none";
-
 			// Blend in second image
-			if (progress.current > 0.7) {
-				ctx.globalAlpha = (progress.current - 0.7) / 0.3;
+			if (progress.current > 0.9) {
+				ctx.globalAlpha = (progress.current - 0.9) / 0.1;
 				ctx.drawImage(
 					img2,
 					img2Params.sx,
