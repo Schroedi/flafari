@@ -90,9 +90,8 @@ html,body {
 
 /* Flickering animation */
 @keyframes flicker {
-    
   0%, 18%, 22%, 25%, 53%, 57%, 100% {
-
+    color: #fff;
     text-shadow:
     0 0 7px #fff,
     0 0 10px #fff,
@@ -101,8 +100,24 @@ html,body {
   }
   
   20%, 24%, 55% {        
-      text-shadow: none;
-  }    
+    color: #bc13fe;
+    text-shadow: none;
+  }   
+  
+  80%, 100% {
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #bc13fe;
+  }
+  
+  81%, 83%, 93%, 95% {
+    color: #bc13fe;
+    text-shadow: none;
+  }
+
 }
 
 .neonText {
