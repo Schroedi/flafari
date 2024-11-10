@@ -91,40 +91,38 @@ export const useCamera = (): UseCameraReturn => {
 				await new Promise((resolve) => setTimeout(resolve, 500));
 			}
 
-			return new Promise((resolve, reject) => {
-				try {
-					// We already checked these refs exist above
-					const context = canvas.getContext("2d");
+			try {
+				// We already checked these refs exist above
+				const context = canvas.getContext("2d");
 
-					if (!context) {
-						throw new Error("Could not get canvas context");
-					}
-
-					// Set canvas dimensions to match video
-					canvas.width = video.videoWidth;
-					canvas.height = video.videoHeight;
-
-					// Draw the video frame to the canvas
-					context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-					// Convert the canvas to a data URL
-					const photoUrl = canvas.toDataURL("image/jpeg");
-
-					// Save the captured image in state
-					setCapturedImage(photoUrl);
-
-					// save the image to local storage
-					if (photoUrl) {
-						localStorage.setItem(`capturedImage-${facingMode}`, photoUrl);
-					}
-
-					resolve(photoUrl);
-				} catch (err) {
-					reject(
-						`Error taking picture: ${err instanceof Error ? err.message : String(err)}`,
-					);
+				if (!context) {
+					throw new Error("Could not get canvas context");
 				}
-			});
+
+				// Set canvas dimensions to match video
+				canvas.width = video.videoWidth;
+				canvas.height = video.videoHeight;
+
+				// Draw the video frame to the canvas
+				context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+				// Convert the canvas to a data URL
+				const photoUrl = canvas.toDataURL("image/jpeg");
+
+				// Save the captured image in state
+				setCapturedImage(photoUrl);
+
+				// save the image to local storage
+				if (photoUrl) {
+					localStorage.setItem(`capturedImage-${facingMode}`, photoUrl);
+				}
+
+				return photoUrl;
+			} catch (err) {
+				throw new Error(
+					`Error taking picture: ${err instanceof Error ? err.message : String(err)}`,
+				);
+			}
 		},
 		[currentFacingMode, startCamera],
 	);
