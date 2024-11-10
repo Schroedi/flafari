@@ -18,7 +18,7 @@ export default function TimoDialog() {
 			<AlertDialogTrigger asChild>
 				<button
 					type="button"
-					className=" bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
+					className=" bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2"
 				>
 					Überleben
 				</button>

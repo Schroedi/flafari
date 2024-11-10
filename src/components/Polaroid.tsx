@@ -26,14 +26,14 @@ const Polaroid: FC<PolaroidProps> = ({
 interface PolaroidFrameProps {
 	children: React.ReactNode;
 	className?: string;
-	comment?: string;
+	comment: string;
 	score?: number;
 }
 
 export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 	children,
 	className,
-	comment = "Flascherazzi Moment",
+	comment,
 	score,
 }) => {
 	return (
@@ -51,7 +51,7 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 					</div>
 				)}
 				<div className="mt-2 text-center text-gray-700 font-handwriting font-semibold text-4xl">
-					<div className="text-3xl">{comment}</div>
+					<p className="text-3xl min-h-[1.2em]">{comment ?? ""}</p>
 				</div>
 			</div>
 		</div>

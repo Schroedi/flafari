@@ -80,12 +80,12 @@ export default function WinPage() {
 	}, [loadedImage]);
 
 	return (
-		<div className="flex flex-col justify-between items-center h-screen bg-gradient-to-br from-purple-700 to-pink-500">
+		<div className="h-screen flex flex-col justify-between items-center bg-gradient-to-br from-purple-700 to-pink-500">
 			<h1 className="text-center text-4xl font-bold text-white mt-8">
 				You did it!
 			</h1>
 
-			<div className="relative mt-0">
+			<div className="relative mt-4">
 				{/* {loadedImage && loadedUserImage && (
 						<>
 							<div className="absolute inset-0 transition-opacity duration-1000 ease-in-out animate-fade-in-out">
@@ -96,12 +96,9 @@ export default function WinPage() {
 							</div>
 						</>
 					)} */}
-				{loadedImage && <p>loadedImage</p>}
-				{loadedUserImage && <p>loadedUserImage</p>}
 				{loadedImage && loadedUserImage && (
 					<PolaroidFrame
-						className="mt-10"
-						comment={progressState > 0.9 ? "Größte Flasche ever." : undefined}
+						comment={progressState > 0.9 ? "Größte Flasche ever." : ""}
 					>
 						<ImageBlender
 							image1={loadedImage}
@@ -110,23 +107,25 @@ export default function WinPage() {
 						/>
 					</PolaroidFrame>
 				)}
-				{isClientMounted && (
+				{/* {isClientMounted && (
 					<Score
 						className="transform -translate-y-[480px] translate-x-[70px]"
 						progress={progress}
 						targetScore={targetScore.current}
 					/>
-				)}
+				)} */}
 			</div>
 
-			<button
-				type="button"
-				onClick={doShare}
-				className="fixed bottom-4 left-1/2 -translate-x-1/2 -translate-y-10 bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
-			>
-				Share <Share className="inline-block ml-1" size={16} />
-			</button>
-			<TimoDialog />
+			<div className="flex flex-row space-x-4 mb-10 mt-4">
+				<TimoDialog />
+				<button
+					type="button"
+					onClick={doShare}
+					className=" bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
+				>
+					Share <Share className="inline-block ml-1" size={16} />
+				</button>
+			</div>
 		</div>
 	);
 }
