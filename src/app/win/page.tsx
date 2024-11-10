@@ -43,7 +43,7 @@ export default function WinPage() {
 						.share({
 							files: [file],
 							title: "Flascherazzi",
-							text: "Ich habe die Flascherazzi geschafft! https://flascherazzi.de",
+							text: "Meine Flasche hat’s geschafft bei Flascherazzi! Zeig deine: https://flascherazzi.de 😄🍾",
 						})
 						.then(() => console.log("Share was successful."))
 						.catch((error) => console.log("Sharing failed", error));
