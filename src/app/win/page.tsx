@@ -81,7 +81,7 @@ export default function WinPage() {
 	}, [loadedImage]);
 
 	return (
-		<div className="h-screen flex flex-col justify-between items-center bg-gradient-to-br from-purple-700 to-pink-500">
+		<div className="h-dvh flex flex-col justify-between items-center bg-gradient-to-br from-purple-700 to-pink-500">
 			<h1 className="text-center text-4xl font-bold text-white mt-8">
 				You did it!
 			</h1>
@@ -100,7 +100,7 @@ export default function WinPage() {
 				)}
 				{isClientMounted && (
 					<Score
-						className="absolute transform -translate-y-[480px] translate-x-[70px]"
+						className="absolute transform -translate-y-[480px] translate-x-[70px] overflow-clip"
 						progress={progress}
 						targetScore={targetScore.current}
 					/>
