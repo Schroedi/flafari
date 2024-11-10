@@ -88,7 +88,7 @@ export const useCamera = (): UseCameraReturn => {
 			if (facingMode !== currentFacingMode) {
 				await startCamera(facingMode);
 				// Wait a bit for camera to adjust
-				await new Promise((resolve) => setTimeout(resolve, 500));
+				await new Promise((resolve) => setTimeout(resolve, 1500));
 			}
 
 			try {

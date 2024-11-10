@@ -13,7 +13,7 @@ export default function Countdown() {
 		const capturePhoto = async () => {
 			try {
 				// wait to make sure the animation is smooth
-				await new Promise((resolve) => setTimeout(resolve, 500));
+				await new Promise((resolve) => setTimeout(resolve, 250));
 				await takePicture("user");
 			} catch (error) {
 				console.error("Failed to take picture:", error);
@@ -21,7 +21,7 @@ export default function Countdown() {
 		};
 
 		capturePhoto();
-	}, []);
+	}, [takePicture]);
 
 	const counterMemo = useMemo(() => {
 		return (
