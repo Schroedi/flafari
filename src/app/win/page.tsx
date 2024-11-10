@@ -32,7 +32,7 @@ export default function WinPage() {
 			}
 		};
 
-		targetScore.current = 500 + Math.floor(Math.random() * 8500);
+		targetScore.current = 9000 + Math.floor(Math.random() * 8500);
 		console.log("targetScore", targetScore.current);
 
 		animationFrameId = requestAnimationFrame(animate);
