@@ -95,8 +95,13 @@ export default function WinPage() {
 							</div>
 						</>
 					)} */}
+				{loadedImage && <p>loadedImage</p>}
+				{loadedUserImage && <p>loadedUserImage</p>}
 				{loadedImage && loadedUserImage && (
-					<PolaroidFrame className="mt-10" comment={progressState> 0.9 ? "Größte Flasche ever." : undefined}>
+					<PolaroidFrame
+						className="mt-10"
+						comment={progressState > 0.9 ? "Größte Flasche ever." : undefined}
+					>
 						<ImageBlender
 							image1={loadedImage}
 							image2={loadedUserImage}

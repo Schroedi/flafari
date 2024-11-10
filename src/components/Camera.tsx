@@ -9,6 +9,7 @@ export default function Camera() {
 
 	const router = require("next/navigation").useRouter();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: enless loop with startCamera
 	useEffect(() => {
 		// Start camera when component mounts
 		startCamera();
