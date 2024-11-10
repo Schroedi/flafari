@@ -5,6 +5,7 @@ import Polaroid, { PolaroidFrame } from "../../components/Polaroid";
 import Score from "@/components/Score";
 import ImageBlender from "@/components/ImageBlender";
 import { Share } from "lucide-react";
+import TimoDialog from "@/components/Timo";
 
 export default function WinPage() {
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
@@ -125,6 +126,7 @@ export default function WinPage() {
 			>
 				Share <Share className="inline-block ml-1" size={16} />
 			</button>
+			<TimoDialog />
 		</div>
 	);
 }
