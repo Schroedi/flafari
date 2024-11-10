@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import type React from "react";
+import { useState, useEffect, useRef } from "react";
 
 // load image
 const useImage = (src: string): HTMLImageElement | null => {
@@ -13,7 +14,11 @@ const useImage = (src: string): HTMLImageElement | null => {
 	return image;
 };
 
-const calculateDrawParams = (img: HTMLImageElement, canvasRatio: number, cutOff: "top" | "equal" ) => {
+const calculateDrawParams = (
+	img: HTMLImageElement,
+	canvasRatio: number,
+	cutOff: "top" | "equal",
+) => {
 	// we might want to cut off the upper part to keep the face in the image
 	const imgRatio = img.width / img.height;
 
@@ -28,17 +33,17 @@ const calculateDrawParams = (img: HTMLImageElement, canvasRatio: number, cutOff:
 interface ImageBlenderProps {
 	image1: string;
 	image2: string;
+	progress: React.MutableRefObject<number>;
 	width?: number;
 	height?: number;
-	duration?: number;
 }
 
 export default function ImageBlender({
 	image1,
 	image2,
+	progress,
 	width = 300,
 	height = 300,
-	duration = 5000,
 }: ImageBlenderProps) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const img1 = useImage(image1);
@@ -54,19 +59,15 @@ export default function ImageBlender({
 		const img2Params = calculateDrawParams(img2, canvasRatio, "top");
 
 		let animationFrameId: number;
-		let startTime: number | null = null;
 
-		const animate = (timestamp: number) => {
-			if (!startTime) startTime = timestamp;
-			const newProgress = Math.min((timestamp - startTime) / duration, 1);
-
+		const animate = () => {
 			// Clear canvas
 			ctx.globalAlpha = 1;
 			ctx.fillStyle = "white";
 			ctx.fillRect(0, 0, width, height);
 
 			// Draw first image
-			ctx.globalAlpha = 0.5 - Math.cos(newProgress * Math.PI) / 2;
+			ctx.globalAlpha = 0.5 - Math.cos(progress.current * Math.PI) / 2;
 			ctx.drawImage(
 				img1,
 				img1Params.sx,
@@ -80,14 +81,14 @@ export default function ImageBlender({
 			);
 
 			// Apply saturation
-			const saturation = Math.min(newProgress / 0.7, 1) * 100;
+			const saturation = Math.min(progress.current / 0.7, 1) * 100;
 			ctx.filter = `saturate(${saturation}%)`;
 			ctx.drawImage(canvas, 0, 0);
 			ctx.filter = "none";
 
 			// Blend in second image
-			if (newProgress > 0.7) {
-				ctx.globalAlpha = (newProgress - 0.7) / 0.3;
+			if (progress.current > 0.7) {
+				ctx.globalAlpha = (progress.current - 0.7) / 0.3;
 				ctx.drawImage(
 					img2,
 					img2Params.sx,
@@ -101,14 +102,14 @@ export default function ImageBlender({
 				);
 			}
 
-			if (newProgress < 1) {
+			if (progress.current < 1) {
 				animationFrameId = requestAnimationFrame(animate);
 			}
 		};
 
 		animationFrameId = requestAnimationFrame(animate);
 		return () => cancelAnimationFrame(animationFrameId);
-	}, [img1, img2, width, height, duration]);
+	}, [progress, img1, img2, width, height]);
 
 	return (
 		<div className="flex flex-col items-center space-y-4">

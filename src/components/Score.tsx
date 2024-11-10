@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import type React from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -60,7 +61,7 @@ const StarParticle = ({
 	);
 };
 
-export default function Score({ className }: { className?: string }) {
+export default function Score({ className, progress }: { className?: string, progress: React.MutableRefObject<number> }) {
 	const [score, setScore] = useState(0);
 	const [starSpeed, setStarSpeed] = useState(0.1);
 	const [starCount, setStarCount] = useState(10);

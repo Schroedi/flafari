@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils";
 import type { FC } from "react";
-import { useState, useEffect } from "react";
-import Score from "@/components/Score";
 
 interface PolaroidProps {
 	src: string;
