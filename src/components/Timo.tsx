@@ -3,6 +3,7 @@
 import {
 	AlertDialog,
 	AlertDialogAction,
+	AlertDialogCancel,
 	AlertDialogContent,
 	AlertDialogDescription,
 	AlertDialogFooter,
@@ -27,31 +28,38 @@ export default function TimoDialog() {
 				<AlertDialogHeader>
 					<AlertDialogTitle>Überleben</AlertDialogTitle>
 					<AlertDialogDescription className="space-y-4" asChild>
-						<div className="p-4">							
-
-							<img src="/christian.jpg" alt="Christian" className="w-full h-auto rounded-lg mb-4" />
-							<p>								
-								Wenn du das Wort „Flasche“ mit Alkohol assoziierst und gerade dein Bier fotografiert hast, bist auch du in Gefahr. 
-								Wir möchten mit diesem Spiel ein Zeichen setzen gegen übermäßigen Alkoholkonsum.
-
-								Im Andenken an Christian (*1968 †9.11.2024), den der Alkohol gestern viel zu früh von uns gerissen hat. Und für den wir die Nacht auf der Intensivstation statt beim Gamejam verbracht haben. 
-
-								Alkoholismus ist ein Bossfight ohne Kampf. 
-								Eine direkte, unfaire Niederlage. 
-								Deine einzige Chance zum Sieg ist es, nicht zu spielen.
+						<div className="p-4">
+							<img
+								src="/christian.jpg"
+								alt="Christian"
+								className="w-full h-auto rounded-lg mb-4"
+							/>
+							<p>
+								Wenn du das Wort „Flasche“ mit Alkohol assoziierst und gerade
+								dein Bier fotografiert hast, bist auch du in Gefahr. Wir möchten
+								mit diesem Spiel ein Zeichen setzen gegen übermäßigen
+								Alkoholkonsum. Im Andenken an Christian (*1968 †9.11.2024), den
+								der Alkohol gestern viel zu früh von uns gerissen hat. Und für
+								den wir die Nacht auf der Intensivstation statt beim Gamejam
+								verbracht haben. Alkoholismus ist ein Bossfight ohne Kampf. Eine
+								direkte, unfaire Niederlage. Deine einzige Chance zum Sieg ist
+								es, nicht zu spielen.
 							</p>
-
-							
 						</div>
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogAction className="mx-10">Schließen</AlertDialogAction>
-					<AlertDialogAction asChild>
-						<a href="https://www.sucht-und-drogen-hotline.de/" target="_blank" rel="noopener noreferrer" className="mx-10">
+					<AlertDialogAction asChild className="mt-2">
+						<a
+							href="https://www.sucht-und-drogen-hotline.de/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="mx-10"
+						>
 							Hilfe erhalten
 						</a>
 					</AlertDialogAction>
+					<AlertDialogCancel className="mx-10">Schließen</AlertDialogCancel>
 				</AlertDialogFooter>
 			</AlertDialogContent>
 		</AlertDialog>
