@@ -108,13 +108,28 @@ export default function WinPage() {
 
 			<div className="flex flex-row space-x-4 mb-10 mt-4">
 				<TimoDialog />
-				<button
-					type="button"
-					onClick={doShare}
-					className=" bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
-				>
-					Share <Share className="inline-block ml-1" size={16} />
-				</button>
+				<div>
+					<button
+						type="button"
+						onClick={doShare}
+						className="min-w-32 z-20 bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
+					>
+						Teilen <Share className="inline-block ml-1" size={16} />
+					</button>
+					{loadedUserImage && (
+						<div
+							className="z-0 absolute border-white border-4 border-b-8 w-16 h-[70px] translate-x-16 -translate-y-[100px] shadow-md transform rotate-12"
+							onClick={doShare}
+							onKeyDown={(e) => e.key === "Enter" && doShare()}
+						>
+							<img
+								src={loadedUserImage}
+								alt="Shared"
+								className="w-full h-full object-cover"
+							/>
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);
