@@ -5,7 +5,7 @@ interface PolaroidProps {
 	src: string;
 	alt: string;
 	className?: string;
-	comment?: string;
+	comment: string;
 	score?: number;
 }
 
@@ -52,7 +52,7 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 					</div>
 				)}
 				<div className="mt-2 text-center text-gray-700 font-handwriting font-semibold text-4xl">
-					<p className="text-3xl min-h-[1.2em]">{comment ?? ""}</p>
+					<p className="text-3xl min-h-[1.2em]">{comment}</p>
 				</div>
 			</div>
 		</div>
