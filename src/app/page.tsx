@@ -42,7 +42,7 @@ export default function Component() {
 				<img
 					src="/Logo.webp"
 					alt="Flascherazzi Logo"
-					className="h-24 sm:h-32"
+					className="w-auto h-24 sm:h-32 object-contain"
 				/>
 				{/* <p className="text-xl font-semibold bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2">
 					!Nur ein Versuch
