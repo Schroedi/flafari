@@ -30,7 +30,7 @@ export default function TimoDialog() {
 					<AlertDialogDescription className="space-y-4" asChild>
 						<div className="p-4">
 							<img
-								src="/christian.jpg"
+								src="/christian.webp"
 								alt="Christian"
 								className="w-full h-auto rounded-lg mb-4"
 							/>
