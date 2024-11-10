@@ -138,7 +138,7 @@ export default function Score({
 				<div className="absolute inset-0 flex items-center justify-center">
 					<motion.div
 						animate={controls}
-						className="text-6xl font-bold text-fuchsia-900 font-mono tabular-nums z-10 neonText"
+						className="text-6xl font-bold font-mono tabular-nums z-10 neonText"
 					>
 						{`${score.toString().padStart(4, "0")}€`}
 					</motion.div>

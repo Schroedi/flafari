@@ -47,7 +47,7 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 			{children}
 			<div className="relative">
 				{score && (
-					<div className="absolute bottom-[50px] left-1/2 transform -rotate-6 -translate-x-1/4 text-6xl font-bold text-fuchsia-900 font-mono tabular-nums neonText z-10">
+					<div className="absolute bottom-[50px] left-1/2 transform -rotate-6 -translate-x-1/4 text-6xl font-bold font-mono tabular-nums neonText z-10">
 						{`${score?.toString().padStart(4, "0")}€`}
 					</div>
 				)}

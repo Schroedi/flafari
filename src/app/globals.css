@@ -101,7 +101,7 @@ html,body {
   }
   
   20%, 24%, 55% {        
-    color: #bc13fe;
+    color: #e091ff;
     text-shadow: none;
   }   
   
@@ -115,7 +115,7 @@ html,body {
   }
   
   81%, 83%, 93%, 95% {
-    color: #bc13fe;
+    color: #e091ff;
     text-shadow: none;
   }
 
@@ -123,7 +123,7 @@ html,body {
 
 .neonText {
   color: #fff;
-  animation: flicker 1.5s infinite alternate;
+  animation: flicker 4.5s infinite alternate;
   /* text-shadow:
     0 0 7px #fff,
     0 0 10px #fff,
