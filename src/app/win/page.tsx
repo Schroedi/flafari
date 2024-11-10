@@ -98,7 +98,7 @@ export default function WinPage() {
 					)} */}
 				{loadedImage && loadedUserImage && (
 					<PolaroidFrame
-						comment={progressState > 0.9 ? "Größte Flasche ever." : undefined}
+						comment={progressState > 0.9 ? "Größte Flasche ever." : ""}
 					>
 						<ImageBlender
 							image1={loadedImage}
