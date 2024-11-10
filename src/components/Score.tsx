@@ -1,19 +1,18 @@
 "use client";
 
 import type React from "react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const StarParticle = ({
-	speed,
-	delay,
-	isExploding,
-}: { speed: number; delay: number; isExploding: boolean }) => {
+const StarParticle = ({ speed, delay }: { speed: number; delay: number }) => {
 	const angle = Math.random() * Math.PI * 2;
-	const distance = isExploding ? Math.random() * 150 : 150 + Math.random() * 50;
+	// const distance = isExploding ? Math.random() * 150 : 150 + Math.random() * 50;
+	const distance = 150 + Math.random() * 50;
 	const initialX = Math.cos(angle) * distance;
 	const initialY = Math.sin(angle) * distance;
+
+	const isExploding = false;
 
 	return (
 		<motion.div
@@ -61,25 +60,35 @@ const StarParticle = ({
 	);
 };
 
-export default function Score({ className, progress, targetScore }: { className?: string, progress: React.MutableRefObject<number> ,targetScore: number}) {
+export default function Score({
+	className,
+	progress,
+	targetScore,
+}: {
+	className?: string;
+	progress: React.MutableRefObject<number>;
+	targetScore: number;
+}) {
 	const [score, setScore] = useState(0);
 	const [starSpeed, setStarSpeed] = useState(0.1);
 	const [starCount, setStarCount] = useState(10);
 	const [isExploding, setIsExploding] = useState(false);
 	const controls = useAnimation();
-	const [scoreLevel, setScoreLevel] = useState(0);
+	const scoreLevel = useRef(0);
 
 	const incrementScore = useCallback(() => {
 		setScore((prevScore) => {
 			const progressFactor = progress.current;
 			const quadraticProgress = progressFactor * progressFactor;
-			const newScore = Math.floor((quadraticProgress * 0.4 + progressFactor * 0.4) * targetScore);
+			const newScore = Math.floor(
+				(quadraticProgress * 0.4 + progressFactor * 0.4) * targetScore,
+			);
 			if (newScore <= prevScore) {
 				return prevScore;
 			}
 			return Math.min(newScore, 9000);
 		});
-	}, [scoreLevel]);
+	}, [progress, targetScore]);
 
 	useEffect(() => {
 		const interval = setInterval(incrementScore, 50);
@@ -89,36 +98,39 @@ export default function Score({ className, progress, targetScore }: { className?
 	useEffect(() => {
 		setStarSpeed(0.1 + score / 1000);
 		setStarCount(Math.min(10 + Math.floor(score / 50), 200));
-		const scoreLevel1 = targetScore / 90;
-		const scoreLevel2 = targetScore *0.7;
+		const scoreLevel1 = 0.3;
+		const scoreLevel2 = 0.7;
 
-		if (score >= scoreLevel1 && scoreLevel < 1) {
+		if (progress.current >= scoreLevel1 && scoreLevel.current < 1) {
 			controls.start({
 				scale: [1, 1.2, 1],
 				rotate: [0, 10],
 				transition: { duration: 0.3 },
 			});
-			setScoreLevel(1);
+			scoreLevel.current = 1;
 		}
 
-		if (score >= scoreLevel2 && scoreLevel < 2) {
+		if (progress.current >= scoreLevel2 && scoreLevel.current < 2) {
 			controls.start({
 				scale: [1, 1.5, 1],
 				rotate: [10, 320],
 				transition: { duration: 0.5 },
 			});
-			setScoreLevel(2);
+			scoreLevel.current = 2;
 		}
 
-		if (score >= targetScore && scoreLevel < 3) {
+		if (progress.current >= 0.95 && scoreLevel.current < 3) {
 			setIsExploding(true);
 			controls.start({
-				rotate: [0, 730],
+				rotate: [320, 730],
 				scale: [1, 2, 1],
 				transition: { duration: 1 },
 			});
+			scoreLevel.current = 3;
 		}
-	}, [score, controls, scoreLevel]);
+	}, [progress, controls, score]);
+
+	const StarParticleMemo = useMemo(() => StarParticle, []);
 
 	return (
 		<div className={cn("text-center", className)}>
@@ -132,12 +144,7 @@ export default function Score({ className, progress, targetScore }: { className?
 					</motion.div>
 				</div>
 				{Array.from({ length: starCount }).map((_, i) => (
-					<StarParticle
-						key={i}
-						speed={starSpeed}
-						delay={i * 0.01}
-						isExploding={isExploding}
-					/>
+					<StarParticleMemo key={i} speed={starSpeed} delay={i * 0.01} />
 				))}
 			</div>
 		</div>

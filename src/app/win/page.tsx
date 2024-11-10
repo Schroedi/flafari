@@ -10,6 +10,7 @@ export default function WinPage() {
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
 	const [loadedUserImage, setLoadedUserImage] = useState<string | null>(null);
 	const [isClientMounted, setIsClientMounted] = useState(false);
+	const targetScore = useRef(0);
 	const progress = useRef(0);
 	const [progressState, setProgressState] = useState(0);
 
@@ -28,6 +29,9 @@ export default function WinPage() {
 				animationFrameId = requestAnimationFrame(animate);
 			}
 		};
+
+		targetScore.current = 500 + Math.floor(Math.random() * 8500);
+		console.log("targetScore", targetScore.current);
 
 		animationFrameId = requestAnimationFrame(animate);
 		return () => cancelAnimationFrame(animationFrameId);
@@ -104,7 +108,7 @@ export default function WinPage() {
 					<Score
 						className="transform -translate-y-[480px] translate-x-[70px]"
 						progress={progress}
-						targetScore={500 + Math.floor(Math.random() * 8500)}
+						targetScore={targetScore.current}
 					/>
 				)}
 			</div>
