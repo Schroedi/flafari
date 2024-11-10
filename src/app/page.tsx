@@ -40,8 +40,11 @@ export default function Component() {
 					alt="Flascherazzi Logo"
 					className="w-auto h-24 sm:h-32 object-contain"
 				/>
-				{/* <p className="text-xl font-semibold bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2">
-					!Nur ein Versuch
+				<p className="text-xl font-semibold bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform -rotate-2">
+					Ein schöner Flaschenhals begeistert! 
+				</p>
+				{/* <p className="text-lg font-semibold text-white px-4 py-2 inline-block">
+					Sammler zahlen Rekordsummen.
 				</p> */}
 			</div>
 
@@ -56,7 +59,7 @@ export default function Component() {
 				<CarouselContent>
 					{images.map((src, index) => (
 						<CarouselItem key={src} className="flex justify-center">
-							<Polaroid 
+							<Polaroid
 								src={src}
 								alt={`Slide ${index + 1}`}
 								comment={bottleData[index].comment}
@@ -68,7 +71,7 @@ export default function Component() {
 			</Carousel>
 			<div className="flex flex-col items-center pb-16 pt-2">
 				<p className="text-center mb-4 text-balance text-lg">
-					Die exklusive Chance, den perfekten Schnapsschuss zu landen.
+					Deine Chance den perfekten Schnapsschuss zu landen.
 				</p>
 				<ScareAlert />
 			</div>
