@@ -86,7 +86,7 @@ export default function Score({
 			if (newScore <= prevScore) {
 				return prevScore;
 			}
-			return Math.min(newScore, 9000);
+			return Math.min(newScore, targetScore);
 		});
 	}, [progress, targetScore]);
 
