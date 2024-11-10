@@ -33,10 +33,6 @@ export default function Component() {
 		{ comment: "Größte Flasche ever.", score: 9000 }
 	];
 
-
-
-
-
 	return (
 		<div className="flex flex-col items-center justify-between min-h-screen bg-gradient-to-b from-purple-500 to-indigo-700 p-8 text-white">
 			<div className="text-center space-y-6 mb-8">

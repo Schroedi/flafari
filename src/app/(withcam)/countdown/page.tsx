@@ -27,7 +27,7 @@ export default function Countdown() {
 		return (
 			<SelfieCounter
 				onComplete={() => {
-					router.push("/win");
+					router.replace("/win");
 				}}
 			/>
 		);

@@ -17,7 +17,7 @@ export default function Camera() {
 	const handleTakePicture = async () => {
 		try {
 			await takePicture("environment");
-			router.push("/countdown");
+			router.replace("/countdown");
 		} catch (err) {
 			console.error("Failed to take picture:", err);
 		}
