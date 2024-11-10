@@ -116,14 +116,14 @@ export default function WinPage() {
 					>
 						Teilen <Share className="inline-block ml-1" size={16} />
 					</button>
-					{loadedUserImage && (
+					{loadedImage && progressState > 0.9 && (
 						<div
 							className="z-0 absolute border-white border-4 border-b-8 w-16 h-[70px] translate-x-16 -translate-y-[100px] shadow-md transform rotate-12"
 							onClick={doShare}
 							onKeyDown={(e) => e.key === "Enter" && doShare()}
 						>
 							<img
-								src={loadedUserImage}
+								src={loadedImage}
 								alt="Shared"
 								className="w-full h-full object-cover"
 							/>
