@@ -14,7 +14,7 @@ export default function Component({ onComplete }: ComponentProps) {
 
 	useEffect(() => {
 		if (count > 0) {
-			const timer = setTimeout(() => setCount(count - 1), 500);
+			const timer = setTimeout(() => setCount(count - 1), 250);
 			return () => clearTimeout(timer);
 		}
 		setIsComplete(true);
