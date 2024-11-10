@@ -13,13 +13,15 @@ const useImage = (src: string): HTMLImageElement | null => {
 	return image;
 };
 
-const calculateDrawParams = (img: HTMLImageElement, canvasRatio: number) => {
-    // we might want to cut off the upper part to keep the face in the image
+const calculateDrawParams = (img: HTMLImageElement, canvasRatio: number, cutOff: "top" | "equal" ) => {
+	// we might want to cut off the upper part to keep the face in the image
 	const imgRatio = img.width / img.height;
-	const sx = imgRatio > canvasRatio ? (img.width - img.height * canvasRatio) / 2 : 0;
-	const sy = imgRatio > canvasRatio ? 0 : (img.height - img.width / canvasRatio) / 2;
+
 	const sw = imgRatio > canvasRatio ? img.height * canvasRatio : img.width;
 	const sh = imgRatio > canvasRatio ? img.height : img.width / canvasRatio;
+
+	const sx = (img.width - sw) / 2;
+	const sy = (img.height - sh) / (cutOff === "top" ? 1 : 2);
 	return { sx, sy, sw, sh };
 };
 
@@ -48,8 +50,8 @@ export default function ImageBlender({
 		if (!canvas || !ctx || !img1 || !img2) return;
 
 		const canvasRatio = width / height;
-		const img1Params = calculateDrawParams(img1, canvasRatio);
-		const img2Params = calculateDrawParams(img2, canvasRatio);
+		const img1Params = calculateDrawParams(img1, canvasRatio, "equal");
+		const img2Params = calculateDrawParams(img2, canvasRatio, "top");
 
 		let animationFrameId: number;
 		let startTime: number | null = null;
@@ -65,7 +67,17 @@ export default function ImageBlender({
 
 			// Draw first image
 			ctx.globalAlpha = 0.5 - Math.cos(newProgress * Math.PI) / 2;
-			ctx.drawImage(img1, img1Params.sx, img1Params.sy, img1Params.sw, img1Params.sh, 0, 0, width, height);
+			ctx.drawImage(
+				img1,
+				img1Params.sx,
+				img1Params.sy,
+				img1Params.sw,
+				img1Params.sh,
+				0,
+				0,
+				width,
+				height,
+			);
 
 			// Apply saturation
 			const saturation = Math.min(newProgress / 0.7, 1) * 100;
@@ -76,7 +88,17 @@ export default function ImageBlender({
 			// Blend in second image
 			if (newProgress > 0.7) {
 				ctx.globalAlpha = (newProgress - 0.7) / 0.3;
-				ctx.drawImage(img2, img2Params.sx, img2Params.sy, img2Params.sw, img2Params.sh, 0, 0, width, height);
+				ctx.drawImage(
+					img2,
+					img2Params.sx,
+					img2Params.sy,
+					img2Params.sw,
+					img2Params.sh,
+					0,
+					0,
+					width,
+					height,
+				);
 			}
 
 			if (newProgress < 1) {
@@ -91,10 +113,10 @@ export default function ImageBlender({
 	return (
 		<div className="flex flex-col items-center space-y-4">
 			<canvas
-					ref={canvasRef}
-					width={width}
-					height={height}
-					className="border border-gray-300 rounded-lg"
+				ref={canvasRef}
+				width={width}
+				height={height}
+				className="border border-gray-300 rounded-lg"
 			/>
 		</div>
 	);
