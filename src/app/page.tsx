@@ -10,6 +10,7 @@ import Polaroid from "../components/Polaroid";
 import { useRouter } from "next/navigation";
 import Autoplay from "embla-carousel-autoplay";
 import ImpressumDialog from "@/components/Impressum";
+import ScareAlert from "@/components/ScareAlert";
 
 export default function Component() {
 	const router = useRouter();
@@ -72,7 +73,7 @@ export default function Component() {
 					Die exklusive Chance, den perfekten Schnapsschuss zu
 					landen.
 				</p>
-				<FlashyButton onClick={() => router.push("/cam")} />
+				<ScareAlert />
 			</div>
 			<ImpressumDialog />
 		</div>
