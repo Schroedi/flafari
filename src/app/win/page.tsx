@@ -6,6 +6,7 @@ import Score from "@/components/Score";
 import ImageBlender from "@/components/ImageBlender";
 import { Share } from "lucide-react";
 import TimoDialog from "@/components/Timo";
+import { cn } from "@/lib/utils";
 
 export default function WinPage() {
 	const [loadedImage, setLoadedImage] = useState<string | null>(null);
@@ -106,7 +107,12 @@ export default function WinPage() {
 				)}
 			</div>
 
-			<div className="flex flex-row space-x-4 mb-10 mt-4">
+			<div
+				className={cn(
+					"flex flex-row space-x-4 mb-10 mt-4 animate-fade-in transition-opacity duration-1000",
+					progressState > 0.95 ? "opacity-100" : "opacity-0"
+				)}
+			>
 				<TimoDialog />
 				<div>
 					<button
@@ -116,7 +122,7 @@ export default function WinPage() {
 					>
 						Teilen <Share className="inline-block ml-1" size={16} />
 					</button>
-					{loadedImage && progressState > 0.9 && (
+					{loadedImage && (
 						<div
 							className="z-0 absolute border-white border-4 border-b-8 w-16 h-[70px] translate-x-16 -translate-y-[100px] shadow-md transform rotate-12"
 							onClick={doShare}
