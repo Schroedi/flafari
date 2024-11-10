@@ -23,7 +23,7 @@ export default function TimoDialog() {
 					Überleben
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="max-h-screen ">
+			<AlertDialogContent className="max-h-screen overflow-y-scroll">
 				<AlertDialogHeader>
 					<AlertDialogTitle>Überleben</AlertDialogTitle>
 					<AlertDialogDescription className="space-y-4" asChild>
