@@ -9,6 +9,7 @@ import FlashyButton from "../components/Startbutton";
 import Polaroid from "../components/Polaroid";
 import { useRouter } from "next/navigation";
 import Autoplay from "embla-carousel-autoplay";
+import ImpressumDialog from "@/components/Impressum";
 
 export default function Component() {
 	const router = useRouter();
@@ -77,6 +78,7 @@ export default function Component() {
 				</p>
 				<FlashyButton onClick={() => router.push("/cam")} />
 			</div>
+			<ImpressumDialog />
 		</div>
 	);
 }
