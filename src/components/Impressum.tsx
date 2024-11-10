@@ -24,7 +24,7 @@ export default function ImpressumDialog() {
 					Impressum
 				</Button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="max-h-screen overflow-scroll">
+			<AlertDialogContent className="max-h-screen overflow-y-scroll">
 				<AlertDialogHeader>
 					<AlertDialogTitle>Impressum</AlertDialogTitle>
 					<AlertDialogDescription className="space-y-4" asChild>
