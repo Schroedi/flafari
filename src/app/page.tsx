@@ -5,7 +5,6 @@ import {
 	CarouselContent,
 	CarouselItem,
 } from "@/components/ui/carousel";
-import FlashyButton from "../components/Startbutton";
 import Polaroid from "../components/Polaroid";
 import { useRouter } from "next/navigation";
 import Autoplay from "embla-carousel-autoplay";
@@ -15,7 +14,6 @@ import ScareAlert from "@/components/ScareAlert";
 export default function Component() {
 	const router = useRouter();
 
-	
 	const images = Array.from(
 		{ length: 10 },
 		(_, i) => `/flaschen/flasche${i + 1}.webp`,
@@ -31,12 +29,12 @@ export default function Component() {
 		{ comment: "Mild & Wild", score: 2580 },
 		{ comment: "Chillout", score: 4200 },
 		{ comment: "Sauber.", score: 6000 },
-		{ comment: "Größte Flasche ever.", score: 9000 }
+		{ comment: "Größte Flasche ever.", score: 9000 },
 	];
 
 	return (
-		<div className="flex flex-col items-center justify-between min-h-screen bg-gradient-to-b from-purple-500 to-indigo-700 p-8 text-white">
-			<div className="text-center space-y-6 mb-8">
+		<div className="flex flex-col items-center justify-between min-h-screen bg-gradient-to-b from-purple-500 to-indigo-700 p-4 text-white">
+			<div className="text-center space-y-6">
 				<img
 					src="/Logo.webp"
 					alt="Flascherazzi Logo"
@@ -48,7 +46,7 @@ export default function Component() {
 			</div>
 
 			<Carousel
-				className="w-full max-w-md"
+				className="w-full max-w-md my-2"
 				plugins={[
 					Autoplay({
 						delay: 2000,
@@ -60,7 +58,7 @@ export default function Component() {
 						<CarouselItem key={src} className="flex justify-center">
 							<Polaroid 
 								src={src}
-								alt={`Slide ${index + 1}`}								
+								alt={`Slide ${index + 1}`}
 								comment={bottleData[index].comment}
 								score={bottleData[index].score}
 							/>
@@ -68,10 +66,9 @@ export default function Component() {
 					))}
 				</CarouselContent>
 			</Carousel>
-			<div className="flex flex-col items-center  pb-16">
+			<div className="flex flex-col items-center pb-16 pt-2">
 				<p className="text-center mb-4 text-balance text-lg">
-					Die exklusive Chance, den perfekten Schnapsschuss zu
-					landen.
+					Die exklusive Chance, den perfekten Schnapsschuss zu landen.
 				</p>
 				<ScareAlert />
 			</div>

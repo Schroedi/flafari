@@ -40,6 +40,7 @@ export const PolaroidFrame: FC<PolaroidFrameProps> = ({
 		<div
 			className={cn(
 				"bg-white p-4 shadow-lg transform rotate-[-2deg] hover:rotate-[2deg] transition-transform duration-300",
+				"shadow-xl",
 				className,
 			)}
 		>
