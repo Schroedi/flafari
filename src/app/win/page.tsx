@@ -11,6 +11,7 @@ export default function WinPage() {
 	const [loadedUserImage, setLoadedUserImage] = useState<string | null>(null);
 	const [isClientMounted, setIsClientMounted] = useState(false);
 	const progress = useRef(0);
+	const [progressState, setProgressState] = useState(0);
 
 	const duration = 5000;
 
@@ -22,6 +23,7 @@ export default function WinPage() {
 			if (!startTime) startTime = timestamp;
 			const newProgress = Math.min((timestamp - startTime) / duration, 1);
 			progress.current = newProgress;
+			setProgressState(newProgress);
 			if (newProgress < 1) {
 				animationFrameId = requestAnimationFrame(animate);
 			}
@@ -90,7 +92,7 @@ export default function WinPage() {
 						</>
 					)} */}
 				{loadedImage && loadedUserImage && (
-					<PolaroidFrame className="mt-10" comment="Größte Flasche ever.">
+					<PolaroidFrame className="mt-10" comment={progressState> 0.9 ? "Größte Flasche ever." : undefined}>
 						<ImageBlender
 							image1={loadedImage}
 							image2={loadedUserImage}
@@ -102,6 +104,7 @@ export default function WinPage() {
 					<Score
 						className="transform -translate-y-[480px] translate-x-[70px]"
 						progress={progress}
+						targetScore={500 + Math.floor(Math.random() * 8500)}
 					/>
 				)}
 			</div>

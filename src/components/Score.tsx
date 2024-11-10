@@ -61,7 +61,7 @@ const StarParticle = ({
 	);
 };
 
-export default function Score({ className, progress }: { className?: string, progress: React.MutableRefObject<number> }) {
+export default function Score({ className, progress, targetScore }: { className?: string, progress: React.MutableRefObject<number> ,targetScore: number}) {
 	const [score, setScore] = useState(0);
 	const [starSpeed, setStarSpeed] = useState(0.1);
 	const [starCount, setStarCount] = useState(10);
@@ -71,8 +71,12 @@ export default function Score({ className, progress }: { className?: string, pro
 
 	const incrementScore = useCallback(() => {
 		setScore((prevScore) => {
-			const scoreIncrement = (Math.floor(prevScore / 100) + 10) * (scoreLevel ** 2 + 1);
-			const newScore = prevScore + scoreIncrement;
+			const progressFactor = progress.current;
+			const quadraticProgress = progressFactor * progressFactor;
+			const newScore = Math.floor((quadraticProgress * 0.4 + progressFactor * 0.4) * targetScore);
+			if (newScore <= prevScore) {
+				return prevScore;
+			}
 			return Math.min(newScore, 9000);
 		});
 	}, [scoreLevel]);
@@ -85,8 +89,10 @@ export default function Score({ className, progress }: { className?: string, pro
 	useEffect(() => {
 		setStarSpeed(0.1 + score / 1000);
 		setStarCount(Math.min(10 + Math.floor(score / 50), 200));
+		const scoreLevel1 = targetScore / 90;
+		const scoreLevel2 = targetScore *0.7;
 
-		if (score >= 100 && scoreLevel < 1) {
+		if (score >= scoreLevel1 && scoreLevel < 1) {
 			controls.start({
 				scale: [1, 1.2, 1],
 				rotate: [0, 10],
@@ -95,7 +101,7 @@ export default function Score({ className, progress }: { className?: string, pro
 			setScoreLevel(1);
 		}
 
-		if (score >= 900 && scoreLevel < 2) {
+		if (score >= scoreLevel2 && scoreLevel < 2) {
 			controls.start({
 				scale: [1, 1.5, 1],
 				rotate: [10, 320],
@@ -104,7 +110,7 @@ export default function Score({ className, progress }: { className?: string, pro
 			setScoreLevel(2);
 		}
 
-		if (score >= 9000 && scoreLevel < 3) {
+		if (score >= targetScore && scoreLevel < 3) {
 			setIsExploding(true);
 			controls.start({
 				rotate: [0, 730],
