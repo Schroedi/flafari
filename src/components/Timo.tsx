@@ -20,73 +20,38 @@ export default function TimoDialog() {
 					type="button"
 					className=" bg-white text-purple-700 px-4 py-2 rounded-full inline-block transform rotate-2"
 				>
-					uberleben
+					Überleben
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="max-h-screen overflow-scroll">
+			<AlertDialogContent className="max-h-screen ">
 				<AlertDialogHeader>
-					<AlertDialogTitle>Impressum</AlertDialogTitle>
+					<AlertDialogTitle>Überleben</AlertDialogTitle>
 					<AlertDialogDescription className="space-y-4" asChild>
-						<div className="p-4">
-							<p>
-								Christoph Schröder-Dering
-								<br />
-								Sophienstraße 9b
-								<br />
-								21079 Hamburg
+						<div className="p-4">							
+
+							<img src="/christian.jpg" alt="Christian" className="w-full h-auto rounded-lg mb-4" />
+							<p>								
+								Wenn du das Wort „Flasche“ mit Alkohol assoziierst und gerade dein Bier fotografiert hast, bist auch du in Gefahr. 
+								Wir möchten mit diesem Spiel ein Zeichen setzen gegen übermäßigen Alkoholkonsum.
+
+								Im Andenken an Christian (*1968 †9.11.2024), den der Alkohol gestern viel zu früh von uns gerissen hat. Und für den wir die Nacht auf der Intensivstation statt beim Gamejam verbracht haben. 
+
+								Alkoholismus ist ein Bossfight ohne Kampf. 
+								Eine direkte, unfaire Niederlage. 
+								Deine einzige Chance zum Sieg ist es, nicht zu spielen.
 							</p>
 
-							<h3 className="font-bold mt-4">Kontakt:</h3>
-							<p>E-Mail: flascherazzi@keks.dev</p>
-
-							<h3 className="font-bold mt-4">Hinweis:</h3>
-							<p>
-								Das Spiel "Flascherazzi" wurde im Rahmen des IGJam#15 Gamejams
-								bei InnoGames in Hamburg am 10.11.2024 entwickelt. Das Thema in
-								diesem Jahr war „Bottleneck". Alle genannten €-Preise sind rein
-								fiktiv und es werden keinerlei realen Verbindlichkeiten
-								versprochen. Der Rechtsweg ist ausgeschlossen. Das Spiel
-								thematisiert Alkoholismus und dient als Kampagne zur
-								Sensibilisierung.
-							</p>
-
-							<h3 className="font-bold mt-4">Datenschutz:</h3>
-							<p>
-								Wir verarbeiten keine personenbezogenen Daten auf unserem
-								Server. Alle Datenverarbeitungen erfolgen ausschließlich lokal
-								auf dem Endgerät der Nutzenden. Es werden keine Cookies
-								verwendet.
-								<br />
-								<br />
-								Sollten Nutzende sich entscheiden, Screenshots oder Inhalte
-								dieser Seite zu teilen, geschieht dies immer freiwillig und auf
-								eigenen Anlass.
-							</p>
-
-							<p className="mt-4">
-								Informationen zum Gamejam finden Sie auf igjam.eu, die Seite des
-								Spiels ist erreichbar unter{" "}
-								<a
-									href="https://igjam.eu/jams/igjam-15/990/"
-									className="text-blue-600 hover:underline"
-								>
-									https://igjam.eu/jams/igjam-15/990/
-								</a>
-								.
-							</p>
-
-							<h3 className="font-bold mt-4">Haftungsausschluss:</h3>
-							<p>
-								Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine
-								Haftung für die Inhalte externer Links. Für den Inhalt der
-								verlinkten Seiten sind ausschließlich deren Betreiber
-								verantwortlich.
-							</p>
+							
 						</div>
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogAction className="mx-10">Schließen</AlertDialogAction>
+					<AlertDialogAction asChild>
+						<a href="https://www.sucht-und-drogen-hotline.de/" target="_blank" rel="noopener noreferrer" className="mx-10">
+							Hilfe erhalten
+						</a>
+					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>
 		</AlertDialog>
