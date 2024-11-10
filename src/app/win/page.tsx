@@ -107,13 +107,13 @@ export default function WinPage() {
 						/>
 					</PolaroidFrame>
 				)}
-				{/* {isClientMounted && (
+				{isClientMounted && (
 					<Score
-						className="transform -translate-y-[480px] translate-x-[70px]"
+						className="absolute transform -translate-y-[480px] translate-x-[70px]"
 						progress={progress}
 						targetScore={targetScore.current}
 					/>
-				)} */}
+				)}
 			</div>
 
 			<div className="flex flex-row space-x-4 mb-10 mt-4">
